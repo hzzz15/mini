@@ -1,0 +1,158 @@
+/* 전체 레이아웃 설정 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #212121; /* 배경색 */
+    color: #FAFAFA; /* 기본 글씨 색상 */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 헤더 스타일 */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #212121; /* 헤더 배경색 */
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    z-index: 10; /* 헤더를 항상 위로 표시 */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover; /* 비율 유지하면서 자르기 */
+    border-radius: 50%; /* 동그란 로고 */
+    margin-right: 10px; /* 로고와 텍스트 사이 여백 */
+}
+
+.logo-text {
+    color: #FAFAFA; /* 로고 텍스트 색상 */
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    position: fixed;
+    top: 60px; /* 헤더 아래로 위치 */
+    left: 0;
+    width: 200px;
+    background-color: #212121; /* 사이드바 배경색 */
+    height: calc(100% - 60px); /* 헤더를 제외한 높이 */
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    color: #FAFAFA; /* 텍스트 색상 */
+    text-decoration: none;
+    padding: 10px 20px;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: background-color 0.3s, width 0.3s; /* 호버 시 크기 변경 애니메이션 추가 */
+}
+
+.sidebar-item:hover {
+    background-color: #333; /* 호버 시 배경색 */
+    width: 158px; /* 호버 시 너비를 158px로 줄임 */
+}
+
+.sidebar-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px; /* 아이콘과 텍스트 간격 */
+}
+
+.sidebar-text {
+    font-size: 16px; /* 사이드바 텍스트 크기 */
+}
+
+/* 메인 콘텐츠 스타일 */
+.content {
+    margin-left: 300px;
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 250px;
+}
+
+/* 박스 컨테이너 */
+.box-container {
+    display: flex;
+    justify-content: center; /* 네모 상자 중앙 정렬 */
+    gap: 150px; /* 버튼 간격 */
+    margin-bottom: -250px;
+    margin-left: 170px;
+}
+
+/* 박스 스타일 */
+.box {
+    text-align: center;
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: #212121; /* 텍스트 색상 */
+}
+
+.box-image {
+    width: 200px;
+    height: 200px;
+    background-color: #cccccc; /* 버튼 배경색 */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.box-text {
+    font-size: 20px;
+    margin-top: 5px; /* 텍스트와 박스 간격 */
+    color: #D9D9D9; /* 텍스트 색상 */
+}
+
+/* 하단 입력 영역 스타일 */
+.footer {
+    text-align: left; /* 왼쪽 정렬 */
+    margin-left: 360px; /* 입력창과 동일한 정렬 */
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 330px; /* 로고와 메인 컨텐츠 간격 */
+}
+
+.footer h1 {
+    font-size: 36px; /* 글씨 크기 키움 */
+    margin-bottom: -20px;
+    margin-left: 100px; /* 입력창과 동일한 위치로 정렬 */
+}
+
+.footer p {
+    font-size: 27px; /* 설명 글씨 크기 키움 */
+    margin-bottom: 20px;
+    margin-left: 100px; /* 입력창과 동일한 위치로 정렬 */
+}
+
+.input-container {
+    text-align: left;
+    margin-left: 100px; /* 입력창 위치 */
+}
+
+.input-container input {
+    width: 100%;
+    height: 30px;
+    max-width: 1000px;
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    background-color: #FAFAFA;
+}

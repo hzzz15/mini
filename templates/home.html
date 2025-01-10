@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - SoulSync</title>
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="logo">
+            <a href="/">
+                <img src="/static/images/logo.jpg" alt="로고" class="logo-image">
+            </a>
+            <span class="logo-text">SoulSync</span>
+        </div>
+    </header>
+
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+        <a href="/home" class="sidebar-item">
+            <img src="/static/images/home.png" alt="Home Icon" class="sidebar-icon">
+            <span class="sidebar-text">홈</span>
+        </a>
+        <a href="/box" class="sidebar-item">
+            <img src="/static/images/archive.png" alt="Archive Icon" class="sidebar-icon">
+            <span class="sidebar-text">보관함</span>
+        </a>
+    </aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="content">
+        <!-- 네모난 4개의 박스 (AI 데이터 추가 예정) -->
+        <!--
+        <div class="grid">
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+        </div>
+        -->
+    </main>
+
+    <!-- 하단 입력 영역 -->
+    <footer class="footer">
+        <h1>오늘은 어떤일이 있었나요?</h1>
+        <p>당신의 일상을 들려주세요</p>
+        <!-- 폼 추가 -->
+        <form action="/recommend" method="POST" class="input-container">
+            <input type="text" name="user_text" placeholder="기분을 입력하세요" required>
+            <button type="submit">추천받기</button>
+        </form>
+    </footer>
+</body>
+</html>

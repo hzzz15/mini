@@ -1,0 +1,90 @@
+/* 전체 레이아웃 설정 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #212121; /* 배경색 */
+    color: #FAFAFA; /* 기본 글씨 색상 */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 헤더 스타일 */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #212121;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    color: #FAFAFA;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 콘텐츠 영역 */
+.content {
+    flex: 1;
+    padding: 40px 20px;
+    margin-top: 70px;
+}
+
+/* 앨범 그룹을 담는 그리드 컨테이너 */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 자동 크기 조정 */
+    gap: 20px;
+    justify-content: center;
+}
+
+/* 앨범 그룹 (4개의 앨범을 정사각형으로 묶음) */
+.grid-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2x2 그리드 */
+    gap: 10px;
+    background-color: #333; /* 그룹 배경 */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 앨범 항목 */
+.album-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* 앨범 표지 */
+.album-cover {
+    width: 100%; /* 컨테이너 너비에 맞게 조정 */
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+/* 앨범 제목 */
+.album-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FAFAFA;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoulSync</title>
+    <link rel="stylesheet" href="/static/main_home_pli.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="/static/images/logo.jpg" alt="SoulSync Logo" class="logo-image">
+            <span class="logo-text">SoulSync</span>
+        </div>
+    </header>
+    
+    <div class="content">
+        <h1>오늘 당신의 기분에 어울리는 음악은?</h1>
+        
+        {% if songs %}
+        <div class="grid-container">
+            {% for group in songs|batch(4) %}
+            <div class="grid-group">
+                {% for song in group %}
+                <div class="album-item">
+                    <img src="{{ song.Image_URL }}" alt="{{ song.Title }}" class="album-cover">
+                    <p class="album-title">{{ song.Title }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>{{ message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
