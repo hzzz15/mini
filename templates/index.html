@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <title>메인 화면</title>
 </head>
 <body>
@@ -16,7 +17,7 @@
             <span class="logo-text">SoulSync</span>
         </div>
         <div class="nav-links">
-            <a href="#" class="nav-button" id="login-button">로그인</a>
+            <button class="nav-button" id="login-button">로그인</button>
             <a href="/signup" class="nav-button">회원가입</a>
         </div>
     </header>
@@ -25,27 +26,23 @@
     <main class="content">
         <div class="box-container">
             <!-- 첫 번째 박스 -->
-            <a href="recommend.html" class="box">
+            <a href="#" class="box" id="happy_box">
                 <img src="/static/images/happy.png" alt="행복이 이미지" class="box-image">
-                <p class="box-text">행복이</p>
             </a>
 
             <!-- 두 번째 박스 -->
-            <a href="recommend.html" class="box">
+            <a href="#" class="box" id="soso_box">
                 <img src="/static/images/soso.png" alt="보통이 이미지" class="box-image">
-                <p class="box-text">보통이</p>
             </a>
 
             <!-- 세 번째 박스 -->
-            <a href="recommend.html" class="box">
+            <a href="#" class="box" id="angry_box">
                 <img src="/static/images/angry.png" alt="화남이 이미지" class="box-image">
-                <p class="box-text">화남이</p>
             </a>
 
             <!-- 네 번째 박스 -->
-            <a href="recommend.html" class="box">
+            <a href="#" class="box" id="sad_box">
                 <img src="/static/images/sad.png" alt="슬픔이 이미지" class="box-image">
-                <p class="box-text">슬픔이</p>
             </a>
         </div>
     </main>
@@ -59,19 +56,18 @@
         </div>
     </footer>
 
+    <!-- 로그인 팝업 -->
     <div class="popup" id="login-popup" style="display: none;">
-        <div class="popup-overlay"></div> <!-- 흐림 효과가 적용될 배경 -->
+        <div class="popup-overlay" id="popup-overlay"></div>
         <div class="popup-content">
-            <h2>Welcome to SoulSync</h2>
-            <form>
+            <h2>로그인</h2>
+            <form id="login-form">
                 <label for="username">아이디</label>
-                <input type="text" id="username" name="username" placeholder="아이디를 입력하세요">
+                <input type="text" id="username" name="username" required>
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
-                <a href="forgot_password" class="forgot-password">비밀번호를 잊으셨나요?</a>
-                <button type="button" id="login-button" class="login-button">로그인</button>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">로그인</button>
             </form>
-            <p class="signup-text">계정이 없으신가요? <a href="signup" class="signup-link">회원가입</a></p>
         </div>
     </div>
 

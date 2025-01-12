@@ -1,41 +1,112 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>SoulSync - 취향 선택</title>
+    <title>SoulSync Music Preference</title>
+    <link rel="stylesheet" href="/static/choice.css">
 </head>
 <body>
-    <div id="welcome-screen" class="popup">
-        <div class="popup-content">
-            <h2>어떤 음악을 좋아하세요?</h2>
-            <p>취향을 선택하고 나에게 맞는 홈을 받아보세요</p>
-            <div class="button-row">
-                <button class="selection-button">가수</button>
-                <button class="selection-button">장르</button>
-            </div>
-            <div class="circle-grid">
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-            </div>
-            <div class="save-button-container">
-                <button id="save-preferences" class="save-button">저장</button>
-            </div>
-        </div>
+    <div class="logo">
+        <img src="/static/images/logo.jpg" alt="SoulSync Logo">
+        <span class="logo-text">SoulSync</span>
     </div>
 
-    <main class="main-container">
-        <!-- 메인 컨텐츠 -->
-        <h1>메인 페이지</h1>
-    </main>
+    <div class="container">
+        <div class="header">
+            <h2>어떤 음악을 좋아하세요?</h2>
+            <p>취향을 선택하고 나에게 맞는 음악을 받아보세요</p>
+        </div>
+        
+        <div class="buttons">
+            <button type="button">가수</button>
+            <button type="button">장르</button>
+        </div>
+        
+        <!-- 위 4개의 circle -->
+        <div class="circle-row">
+            <div class="circle-item">
+                <div class="circle">
+                    <img src="/static/images/aesps.jpg" alt="Artist 1" class="circle-image">
+                    <div class="overlay"></div>
+                    <img src="/static/images/heart.png" alt="Heart" class="heart">
+                </div>
+                <p class="circle-text">에스파</p>
+            </div>
 
-    <script src="main.js"></script>
+            <div class="circle-item">
+                <div class="circle">
+                    <img src="/static/images/blackpink.jpg" alt="Artist 2" class="circle-image">
+                    <div class="overlay"></div>
+                    <img src="/static/images/heart.png" alt="Heart" class="heart">
+                </div>
+                <p class="circle-text">블랙핑크</p>
+            </div>
+
+            <div class="circle-item">
+                <div class="circle">
+                    <img src="/static/images/btob.jpg" alt="Artist 3" class="circle-image">
+                    <div class="overlay"></div>
+                    <img src="/static/images/heart.png" alt="Heart" class="heart">
+                </div>
+                <p class="circle-text">비투비</p>
+            </div>
+
+            <div class="circle-item">
+                <div class="circle">
+                    <img src="/static/images/davichi.jpg" alt="Artist 4" class="circle-image">
+                    <div class="overlay"></div>
+                    <img src="/static/images/heart.png" alt="Heart" class="heart">
+                </div>
+                <p class="circle-text">다비치</p>
+            </div>
+        </div>
+
+        <!-- 아래 4개의 circle -->
+        <div class="circle-row">
+            <div class="circle-item">
+                <div class="circle">
+                    <img src="/static/images/iu.png" alt="Artist 5" class="circle-image">
+                    <div class="overlay"></div>
+                    <img src="/static/images/heart.png" alt="Heart" class="heart">
+                </div>
+                <p class="circle-text">아이유</p>
+            </div>
+
+            <div class="circle-item">
+                <div class="circle">
+                    <img src="/static/images/ive.jpg" alt="Artist 6" class="circle-image">
+                    <div class="overlay"></div>
+                    <img src="/static/images/heart.png" alt="Heart" class="heart">
+                </div>
+                <p class="circle-text">아이브</p>
+            </div>
+
+            <div class="circle-item">
+                <div class="circle">
+                    <img src="/static/images/riize.jpg" alt="Artist 7" class="circle-image">
+                    <div class="overlay"></div>
+                    <img src="/static/images/heart.png" alt="Heart" class="heart">
+                </div>
+                <p class="circle-text">라이즈</p>
+            </div>
+
+            <div class="circle-item">
+                <div class="circle">
+                    <img src="/static/images/melomance.jpg" alt="Artist 8" class="circle-image">
+                    <div class="overlay"></div>
+                    <img src="/static/images/heart.png" alt="Heart" class="heart">
+                </div>
+                <p class="circle-text">멜로망스</p>
+            </div>
+        </div>
+        
+        <form action="home.html" method="POST">
+            <button type="submit" class="save-btn">저장</button>
+        </form>
+    </div>
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="choice.js"></script>
 </body>
 </html>

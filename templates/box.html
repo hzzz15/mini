@@ -10,7 +10,7 @@
     <!-- 헤더 -->
     <header class="header">
         <div class="logo">
-            <a href="/">
+            <a href="/home">
                 <img src="/static/images/logo.jpg" alt="로고" class="logo-image">
             </a>
             <span class="logo-text">SoulSync</span>
@@ -19,99 +19,58 @@
 
     <!-- 사이드바 -->
     <aside class="sidebar">
-        <a href="home.html" class="sidebar-item">
+        <a href="/home" class="sidebar-item">
             <img src="/static/images/home.png" alt="Home Icon" class="sidebar-icon">
             <span class="sidebar-text">홈</span>
         </a>
-        <a href="box.html" class="sidebar-item">
-            <img src="/static/images/archive.png" alt="Archive Icon" class="sidebar-icon">
-            <span class="sidebar-text">보관함</span>
-        </a>
     </aside>
-
-
+    
     <!-- 메인 콘텐츠 시작 -->
     <div class="main-content">
+        <div class="mood-banner">
+            {% if mood == 'Happy' %}
+            <p class="mood-text">기분이 좋으신가요? 당신의 하루를 더 즐겁게 만들어줄 음악을 추천합니다!</p>
+            {% elif mood == 'Sentimental' %}
+            <p class="mood-text">감수성이 풍부한 하루군요. 감성적인 선율을 추천합니다.</p>
+            {% elif mood == 'Angry' %}
+            <p class="mood-text">화가 난 마음을 가라앉혀 줄 음악이 필요하시군요. 추천 음악을 들어보세요.</p>
+            {% elif mood == 'Sad' %}
+            <p class="mood-text">오늘 조금 힘든 하루셨나요? 마음을 달래줄 음악이 준비되어 있습니다.</p>
+            {% else %}
+            <p class="mood-text">"당신의 하루를 음악으로 채워보세요!"</p>
+            {% endif %}
+        </div>
+
+        <!-- 플레이리스트 섹션 -->
         <div class="playlist-section">
-            <h2>재생목록</h2>
+            <h2>재생목록</h2> <!-- 동적으로 제목 표시 -->
             <div class="playlist">
-                <a href="list.html" class="playlist-link">
-                    <div class="playlist-item">
-                        <img src="/static/images/song1.jpg">
-                        <img src="/static/images/song2.jpg">
-                        <img src="/static/images/song3.jpg">
-                        <img src="/static/images/song4.jpg">
-                    </div>
-                    <p class="playlist-name">믹스이름</p>
-                </a>
-            </div>
-            <div class="playlist">
-                <a href="list.html" class="playlist-link">
-                    <div class="playlist-item">
-                        <img src="/static/images/song1.jpg">
-                        <img src="/static/images/song2.jpg">
-                        <img src="/static/images/song3.jpg">
-                        <img src="/static/images/song4.jpg">
-                    </div>
-                    <p class="playlist-name">믹스이름</p>
-                </a>
+                <div class="playlist-item">
+                    {% for song in playlist %}
+                    <img src="{{ song.Image_URL }}" alt="{{ song.Song }}">
+                    {% endfor %}
+                </div>
             </div>
         </div>
-        
-        
-        <div class="songs-section">
-            <h2>노래</h2>
-            <div class="songs-list">
-                <a href="sing.html" class="song-link">
-                    <div class="song-item">
-                        <img src="/static/images/song1.jpg" alt="노래 이미지" class="song-image">
-                        <div class="song-info">
-                            <p class="song-title">노래제목 1</p>
-                            <p class="song-artist">가수 1</p>
-                        </div>
+
+    <!-- 노래 섹션 -->
+    <div class="songs-section">
+        <h2>추천곡</h2>
+        <div class="songs-list">
+            {% for song in top_songs %}
+            <a href="/sing" class="song-link">
+                <div class="song-item">
+                    <img src="{{ song.Image_URL }}" alt="{{ song.Song }}" class="song-image">
+                    <div class="song-info">
+                        <p class="song-title">{{ song.Song }}</p>
+                        <p class="song-artist">{{ song.Artist }}</p>
                     </div>
-                </a>
-                <a href="sing.html" class="song-link">
-                    <div class="song-item">
-                        <img src="/static/images/song2.jpg" alt="노래 이미지" class="song-image">
-                        <div class="song-info">
-                            <p class="song-title">노래제목 2</p>
-                            <p class="song-artist">가수 2</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="sing.html" class="song-link">
-                    <div class="song-item">
-                        <img src="/static/images/song3.jpg" alt="노래 이미지" class="song-image">
-                        <div class="song-info">
-                            <p class="song-title">노래제목 3</p>
-                            <p class="song-artist">가수 3</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="sing.html" class="song-link">
-                    <div class="song-item">
-                        <img src="/static/images/song4.jpg" alt="노래 이미지" class="song-image">
-                        <div class="song-info">
-                            <p class="song-title">노래제목 4</p>
-                            <p class="song-artist">가수 4</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="sing.html" class="song-link">
-                    <div class="song-item">
-                        <img src="/static/images/song5.jpg" alt="노래 이미지" class="song-image">
-                        <div class="song-info">
-                            <p class="song-title">노래제목 5</p>
-                            <p class="song-artist">가수 5</p>
-                        </div>
-                    </div>
-                </a>
-                <!-- 추가적인 노래 아이템 -->
-            </div>
+                </div>
+            </a>
+            {% endfor %}
         </div>
     </div>
-    <!-- 메인 콘텐츠 끝 -->
+</div>
 
 </body>
 </html>
