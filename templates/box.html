@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - SoulSync</title>
-    <link rel="stylesheet" href="/static/box.css"> <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="/static/box.css"> 
 </head>
 <body>
-    <!-- 헤더 -->
     <header class="header">
         <div class="logo">
             <a href="/home">
@@ -17,7 +16,6 @@
         </div>
     </header>
 
-    <!-- 사이드바 -->
     <aside class="sidebar">
         <a href="/home" class="sidebar-item">
             <img src="/static/images/home.png" alt="Home Icon" class="sidebar-icon">
@@ -25,7 +23,6 @@
         </a>
     </aside>
     
-    <!-- 메인 콘텐츠 시작 -->
     <div class="main-content">
         <div class="mood-banner">
             {% if mood == 'Happy' %}
@@ -49,9 +46,8 @@
             {% endif %}
         </div>
 
-        <!-- 플레이리스트 섹션 -->
         <div class="playlist-section">
-            <h2>재생목록</h2> <!-- 동적으로 제목 표시 -->
+            <h2>재생목록</h2> 
             <div class="playlist">
                 <div class="playlist-item">
                     {% for song in playlist %}
@@ -61,12 +57,11 @@
             </div>
         </div>
 
-    <!-- 노래 섹션 -->
     <div class="songs-section">
         <h2>추천곡</h2>
         <div class="songs-list">
             {% for song in top_songs %}
-            <a href="/sing" class="song-link">
+            <a href="#" class="song-link">
                 <div class="song-item">
                     <img src="{{ song.Image_URL }}" alt="{{ song.Song }}" class="song-image">
                     <div class="song-info">
