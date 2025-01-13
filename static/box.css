@@ -86,19 +86,20 @@ body {
 .main-content {
     display: flex;
     gap: 20px;
-    justify-content: center; /* 가로 정렬은 왼쪽 정렬 */
-    align-items: flex-start; /* 세로 정렬을 상단으로 맞춤 */
+    justify-content: center;
+    align-items: flex-start;
     position: relative;
     margin-top: 60px; /* 헤더 아래로 위치 */
-    margin-left: 200px; /* 사이드바 오른쪽 */
-    width: calc(100% - 200px); /* 사이드바 제외 너비 */
+    margin-left: 300px; /* 기존 200px에서 300px으로 조정하여 우측으로 이동 */
+    width: calc(100% - 300px); /* 사이드바 제외 너비 */
     height: calc(100% - 60px); /* 헤더 제외 높이 */
     padding: 20px;
     z-index: 1; /* 메인 콘텐츠를 헤더와 사이드바 아래로 표시 */
 }
 
+
 .playlist {
-    margin-left: -750px; /* 왼쪽으로 이동 */
+    margin-left: -660px; /* 왼쪽으로 이동 */
     margin-top: 210px; /* 위에서 아래로 이동 */
 }
 
@@ -164,7 +165,7 @@ body {
 .songs-section {
     position: relative; /* 위치 설정 가능 */
     left: -600px; /* 왼쪽으로 이동 */
-    top: 100px; /* 아래로 이동 */
+    top: 190px; /* 아래로 이동 */
 }
 
 .songs-section h2 { /*노래*/
@@ -271,7 +272,17 @@ body {
     background-color: #444;
 }
 
-.mood-text {
+.mood-text1 {
+    font-size: 50px; /* 텍스트 크기 */
+    font-weight: bold; /* 텍스트 두께 */
+    color: #f5f5f5; /* 텍스트 색상 */
+    text-align: center; /* 텍스트를 중앙 정렬 */
+    white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+    margin-top: 20px; /* 위쪽 여백 */
+    margin-left: 700px;
+}
+
+.mood-text2 {
     font-size: 25px; /* 텍스트 크기 */
     font-weight: bold; /* 텍스트 두께 */
     color: #f5f5f5; /* 텍스트 색상 */
