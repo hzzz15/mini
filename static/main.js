@@ -1,16 +1,13 @@
-// 로그인 버튼 클릭 시 팝업 표시
 document.getElementById("login-button").addEventListener("click", () => {
     const popup = document.getElementById("login-popup");
     popup.style.display = "flex";
 });
 
-// 팝업 배경 클릭 시 팝업 닫기
 document.getElementById("popup-overlay").addEventListener("click", () => {
     const popup = document.getElementById("login-popup");
     popup.style.display = "none";
 });
 
-// 로그인 폼 제출 처리
 document.getElementById("login-form").addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -27,7 +24,7 @@ document.getElementById("login-form").addEventListener("submit", async (event) =
         });
 
         if (response.ok) {
-            window.location.href = "/home?username=" + username; // 홈으로 이동
+            window.location.href = "/home?username=" + username;
         } else {
             const errorMessage = await response.json();
             alert(errorMessage.message);
