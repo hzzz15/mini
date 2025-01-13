@@ -20,11 +20,9 @@ templates = Jinja2Templates(directory="templates/")
 
 # 데이터베이스 연결 및 테이블 확인/생성
 def setup_database():
-        # 데이터베이스 연결
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
 
-    # 테이블 생성
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,7 +31,6 @@ def setup_database():
     )
     """)
 
-    # 중복 확인 후 데이터 삽입
     username = "testuser"
     password = "testpassword"
 
@@ -58,8 +55,6 @@ def get_db_connection():
 
 # CSV 데이터 로드
 songs_data = pd.read_csv("data/songs.csv")
-
-####################################################################
 
 # 메인 페이지
 @app.get("/")
@@ -98,11 +93,10 @@ async def signup(username: str = Form(...), password: str = Form(...), confirm_p
 
 # 로그인 엔드포인트
 @app.post("/login")
-async def login_user(username: str = Form(...), password: str = Form(...)):
+async def login_user(request: Request, username: str = Form(...), password: str = Form(...)):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # 사용자 인증
     cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
     user = cursor.fetchone()
     conn.close()
@@ -110,20 +104,21 @@ async def login_user(username: str = Form(...), password: str = Form(...)):
     if not user:
         return JSONResponse(content={"message": "로그인 실패: 잘못된 아이디 또는 비밀번호"}, status_code=401)
 
-    # 로그인 성공
-    return RedirectResponse(url=f"/home?username={username}", status_code=303)
+    # 로그인 성공 시 세션에 username 저장
+    request.session["username"] = username
+    return RedirectResponse(url="/home", status_code=303)
 
 # 홈 페이지
-@app.get("/home")
-async def home(request: Request, username: str):
-    return templates.TemplateResponse("home.html", {"request": request, "username": username})
+@app.get("/home", response_class=HTMLResponse)
+async def home_page(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request, "username": "Guest"})
 
 @app.get("/logout")
 def logout(request: Request):
-    request.session.clear()  # 세션 데이터 삭제
+    request.session.clear() 
     return RedirectResponse(url="/login", status_code=302)
 
-# 회원가입 엔드포인트 (추가)
+# 회원가입 엔드포인트
 @app.get("/signup")
 async def signup_page(request: Request):
     return templates.TemplateResponse("signup.html", {"request": request})
@@ -156,12 +151,30 @@ def reset_password(username: str = Form(...), new_password: str = Form(...)):
     conn.close()
     return {"message": "비밀번호가 성공적으로 변경되었습니다."}
 
-@app.get("/home")
-async def home_page(request: Request):
+@app.get("/home", response_class=HTMLResponse)
+async def home_page(request: Request, username: str = None):
+    """
+    /home 엔드포인트
+    """
+    if not username:
+        username = "Guest" 
+    
     return templates.TemplateResponse("home.html", {
         "request": request,
-        "username": username  # 사용자 이름 전달
+        "username": username
     })
+
+@app.get("/other_page", response_class=HTMLResponse)
+async def other_page(request: Request, username: str):
+    return templates.TemplateResponse("other_page.html", {"request": request, "username": username})
+
+@app.post("/redirect-to-home")
+async def redirect_to_home(username: str = Form(...)):
+    """
+    헤더 클릭 시 username을 포함하여 home.html로 이동
+    """
+    url = f"/home?username={username}"
+    return RedirectResponse(url=url, status_code=302)
 
 # 감정별 노래리스트 box
 @app.get("/box1", response_class=HTMLResponse)
@@ -182,7 +195,7 @@ async def box4_page(request: Request):
 
 async def render_box_page(request: Request, mood: str, title: str):
     try:
-        print(f"DEBUG: mood = {mood}, title = {title}")  # 디버깅 로그
+        print(f"DEBUG: mood = {mood}, title = {title}") 
         filtered_songs = songs_data[songs_data["Mood"] == mood]
         selected_songs = filtered_songs.sample(n=min(8, len(filtered_songs))).to_dict(orient="records")
 
@@ -194,7 +207,7 @@ async def render_box_page(request: Request, mood: str, title: str):
             "playlist": playlist,
             "top_songs": top_songs,
             "title": title,
-            "mood": mood  # 무드 값 전달
+            "mood": mood  
         })
     except Exception as e:
         print(f"오류 발생: {e}")
@@ -213,7 +226,6 @@ async def read_main_home_pli(request: Request):
 async def read_sing(request: Request):
     return templates.TemplateResponse("sing.html", {"request": request})
 
-####################
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
     return FileResponse("static/favicon.ico")
@@ -223,8 +235,7 @@ async def main_page(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 ############ 추천
-
-# 감정 매핑 (모델의 출력값 → CSV의 Mood 값)
+# 감정 매핑
 MOOD_MAPPING = {
     "Anger": "Angry",
     "Fear": "Sentimental",
@@ -233,7 +244,6 @@ MOOD_MAPPING = {
     "Sad": "Sad"
 }
 
-# 감정 피드백 메시지
 # 감정 피드백 메시지
 MOOD_COMMENTS = {
     "Happy": "오늘 당신의 기분은 행복하군요! 신나는 노래로 기분을 더 업그레이드해보세요!",
@@ -262,16 +272,14 @@ def analyze_sentiment(self, text: str) -> str:
         if not hasattr(outputs, "last_hidden_state"):
             raise ValueError("모델 출력값이 유효하지 않습니다.")
         
-        logits = outputs.last_hidden_state.mean(dim=1)  # 평균 벡터 계산
+        logits = outputs.last_hidden_state.mean(dim=1)
         if logits.size(0) == 0:
             raise ValueError("모델 출력값이 비어 있습니다.")
 
-    # 레이블 추론
     predicted_label = logits.argmax(dim=1).item()
     if predicted_label >= len(self.emotion_labels):
         raise ValueError("예측된 레이블이 감정 레이블 범위를 벗어났습니다.")
 
-    # 감정 레이블 반환
     return self.emotion_labels[predicted_label]
 
 # SentimentAnalyzer 초기화
@@ -344,20 +352,17 @@ async def recommend_songs(request: Request, user_text: str = Form(...)):
 @app.get("/list", response_class=HTMLResponse)
 async def list_page(request: Request, mood: str):
     try:
-        # CSV 데이터 필터링
         filtered_songs = songs_data[songs_data["Mood"].str.lower() == mood.lower()]
-        filtered_songs = filtered_songs.head(12).to_dict(orient="records")  # 상위 12개 데이터만 전달
+        filtered_songs = filtered_songs.head(12).to_dict(orient="records") 
+        print(f"Filtered songs for Mood '{mood}':", filtered_songs)
         
-        print(f"Filtered songs for Mood '{mood}':", filtered_songs)  # 디버깅용 출력
-        
-        # 템플릿에 데이터 전달
         return templates.TemplateResponse("list.html", {
             "request": request,
             "songs": filtered_songs,
             "mood": mood
         })
     except Exception as e:
-        print(f"Error in /list route: {e}")  # 오류 디버깅
+        print(f"Error in /list route: {e}") 
         return templates.TemplateResponse("list.html", {
             "request": request,
             "songs": [],
