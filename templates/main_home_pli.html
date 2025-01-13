@@ -14,7 +14,6 @@
         </div>
     </header>
 
-    <!-- 사이드바 -->
     <aside class="sidebar">
         <a href="/home" class="sidebar-item">
             <img src="/static/images/home.png" alt="Home Icon" class="sidebar-icon">
@@ -25,18 +24,15 @@
     <div class="content">
         <h1>오늘 당신의 기분에 어울리는 음악은?</h1>
         
-        <!-- 감정 분석 피드백 -->
         {% if feedback %}
         <div class="feedback-container">
             <p class="feedback">{{ feedback }}</p>
         </div>
         {% endif %}
 
-        <!-- 추천된 노래 목록 -->
         {% if songs %}
         <div class="grid-container">
             {% for group in songs|batch(4) %}
-            <!-- 첫 번째 그룹만 클릭 가능 -->
             <div class="grid-group {% if loop.index == 1 %}first-group{% endif %}">
                 {% for song in group %}
                 <div class="album-item">
@@ -48,7 +44,6 @@
             </div>
             {% endfor %}
         </div>
-        <!-- /list로 이동 버튼 -->
         <div class="list-navigation">
             <a href="/list?mood={{ mood }}" class="btn">추천된 노래 더 보기</a>
         </div>
@@ -59,11 +54,10 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // 첫 번째 박스를 클릭하면 /list로 이동
             const firstGroup = document.querySelector(".grid-group.first-group");
             if (firstGroup) {
                 firstGroup.addEventListener("click", function() {
-                    const mood = "{{ mood }}"; // 서버에서 전달된 mood 값
+                    const mood = "{{ mood }}"; 
                     window.location.href = `/list?mood=${mood}`;
                 });
             }
