@@ -20,7 +20,7 @@ body {
     padding: 15px 20px;
     display: flex;
     align-items: center;
-    z-index: 10; /* 헤더를 항상 위로 표시 */
+    z-index: 1000; /* 헤더를 항상 위로 표시 */
 }
 
 .logo {
@@ -54,6 +54,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    z-index: 999; /* 사이드바를 항상 위로 표시 */
 }
 
 .sidebar-item {
@@ -82,18 +83,18 @@ body {
     font-size: 16px; /* 사이드바 텍스트 크기 */
 }
 
-
 .main-content {
     display: flex;
     gap: 20px;
     justify-content: center; /* 가로 정렬은 왼쪽 정렬 */
     align-items: flex-start; /* 세로 정렬을 상단으로 맞춤 */
-    position: absolute;
-    top: 60px; /* 헤더 아래 */
-    left: 200px; /* 사이드바 오른쪽 */
+    position: relative;
+    margin-top: 60px; /* 헤더 아래로 위치 */
+    margin-left: 200px; /* 사이드바 오른쪽 */
     width: calc(100% - 200px); /* 사이드바 제외 너비 */
     height: calc(100% - 60px); /* 헤더 제외 높이 */
     padding: 20px;
+    z-index: 1; /* 메인 콘텐츠를 헤더와 사이드바 아래로 표시 */
 }
 
 .playlist {
@@ -169,7 +170,6 @@ body {
     font-size: 30px;
     color: #ffffff;
 }
-
 
 .song-link {
     display: block; /* song-item 전체를 클릭 가능하게 설정 */
